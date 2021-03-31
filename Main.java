@@ -5,11 +5,5 @@ class Main {
     if(x >= 3){
       System.out.println("Lol");
     }
-    else if{
-      System.out.println(Hi);
-    }
-    else{
-      System.out.println(Hello);
-    }
  }
 }
