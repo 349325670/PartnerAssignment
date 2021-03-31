@@ -5,7 +5,7 @@ class Main {
     if(x >= 3){
       System.out.println("Lol");
     }
-    else{
+    else if{
       System.out.println(Hi);
     }
   }
