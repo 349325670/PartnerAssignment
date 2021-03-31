@@ -8,5 +8,8 @@ class Main {
     else if{
       System.out.println(Hi);
     }
-  }
+    else{
+      System.out.println(Hello);
+    }
+ }
 }
