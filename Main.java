@@ -58,13 +58,35 @@ class Main {
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void enterCustomerInfo() {
+   public static void enterCustomerInfo() {
+
+      //Initializing Scanner inside enterCustomerInfo method to take user inputs
+      Scanner reader= new Scanner(System.in);
+
+        //Asknig for information and prompting user to enter info
+
+        //Promts user to input their first name
+        System.out.println("What is your FIRST name?");
+        String firstName=reader.nextLine();
+        
+        //Prompts user to input their last name
+        System.out.println("What is your LAST name?");
+        String lastName= reader.nextLine();
+
+        //Promts user to input city of residence.
+        System.out.println("What is your city name?");
+        String city= reader.nextLine();
+
+        //Promts user to input postal Code
+        System.out.println("What is your postal code?");
+        String postalCode= reader.nextLine();
+
+        //Promts to take input for card number
+        System.out.println("What is your credit card number?");
+
+        //I am not taking input below here. Instead I will take the input in the main method right after this method has been called.
     }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
+
     public static void validatePostalCode(){
     }
     /*
