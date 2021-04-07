@@ -2,11 +2,15 @@
 
 
 import java.util.Scanner;
+import java.io.PrintWriter;
+import java.io.File;
 // More packages may be imported in the space below
 
 class Main {
   public static void main(String[] args) {
 
+    File f = new File("File");
+    System.out.println(f.getAbsolutePath());
     
     // Please do not edit any of these variables
     Scanner reader = new Scanner(System.in);
@@ -17,6 +21,8 @@ class Main {
 
     // More variables for the main may be declared in the space below
 
+    String data = "ID,First Name,Last Name,City,Postal Code,Credit Card\n";
+      int customerId = 1;
 
     do{
 
@@ -27,7 +33,9 @@ class Main {
 
         // Only the line below may be editted based on the parameter list and how you design the method return
 		    // Any necessary variables may be added to this if section, but nowhere else in the code
-        enterCustomerInfo();
+        String customer = enterCustomerInfo(customerId);
+        data = data.concat(customer).concat("\n");
+        customerId = customerId + 1;                
       }
       else if (userInput.equals(generateCustomerOption)) {
 
@@ -36,7 +44,7 @@ class Main {
       }
       else{
         System.out.println("Please type in a valid option (A number from 1-9)");
-        }
+      }
 
         } while (!userInput.equals(exitCondition));         // Exits once the user types 
         
@@ -58,7 +66,7 @@ class Main {
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-   public static void enterCustomerInfo() {
+   public static void enterCustomerInfo(int customerId) {
 	   
 	//Initializing Scanner inside enterCustomerInfo method to take user inputs
       	Scanner reader= new Scanner(System.in);
@@ -76,18 +84,9 @@ class Main {
         //Promts user to input city of residence.
         System.out.println("What is your city name?");
         String city= reader.nextLine();
-
-        //Promts user to input postal Code
-        System.out.println("What is your postal code?");
-        String postalCode= reader.nextLine();
-
-        //Promts to take input for card number
-        System.out.println("What is your credit card number?");
-        String creditCard = reader.nextLine();
-
+        
         //I am not taking input below here. Instead I will take the input in the main method right after this method has been called.
    }
-    
 
     public static boolean validatePostalCode(String postalCode){
       if(postalCode.length() < 3) {
@@ -108,9 +107,9 @@ class Main {
         		.concat(city).concat(",")
         		.concat(postalCode).concat(",")
         		.concat(creditCard).concat(",");
-        		//.concat(customerId + "");
     	
         return customer;
+    }
 
         try {
     		File pcFile = new File("postal_codes.csv");
