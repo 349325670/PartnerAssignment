@@ -93,6 +93,12 @@ class Main {
             postalCode = reader.nextLine();
             isValidPostalCode = validatePostalCode(postalCode);        	
         } while (!isValidPostalCode);
+	   
+	   
+	   //Promts to take input for card number
+        System.out.print("What is your credit card number? ");
+        String creditCardNum= reader.nextLine();
+        validateCreditCard(creditCardNum);
 
         String customer = (customerId+"").concat(",")
             .concat(firstName).concat(",")
