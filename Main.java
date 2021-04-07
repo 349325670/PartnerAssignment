@@ -32,7 +32,7 @@ class Main {
       else if (userInput.equals(generateCustomerOption)) {
 
         // Only the line below may be editted based on the parameter list and how you design the method return
-        generateCustomerDataFile();
+        generateCustomerDataFile(data);
       }
       else{
         System.out.println("Please type in a valid option (A number from 1-9)");
@@ -149,10 +149,49 @@ class Main {
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void generateCustomerDataFile(){
+    public static void generateCustomerDataFile(String data){
+      Scanner reader = new Scanner(System.in);
+        boolean shouldWrite;
+        File file;
+        do {
+	        System.out.print("Enter Output File Location : ");
+	        String fileLocation = reader.nextLine();
+	
+	        System.out.print("Enter Output File Name : ");
+	        String fileName = reader.nextLine();
+	        
+	        shouldWrite=true;
+	        file = new File(fileLocation, fileName);
+	        if(file.exists()) {
+	        	System.out.print("File already exists, do you want to use the same file? (y/n) ");
+	        	if (!reader.nextLine().startsWith("y"))
+	            {
+	        		shouldWrite= false;
+	            }
+	        }
+        } while (!shouldWrite);
+
+        try {
+			PrintWriter out = new PrintWriter(file);
+			out.println(data);
+			out.close();
+		} catch (Exception e) {
+    		System.out.println("An error occurred.");
+			e.printStackTrace();
     }
+		}
+    public static boolean matchPostalCode(String postalCode, String data) {
+		String codeFromFile = data.substring(0,3);
+		for(int i=0;i<3;i++) {
+			char fileChar = codeFromFile.charAt(i);
+			char postalCodeChar = postalCode.charAt(i);
+			if(fileChar!=postalCodeChar) {
+				return false;
+			}
+		}
+		return true;
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
     *******************************************************************/
-    
+  } 
  }
