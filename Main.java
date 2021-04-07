@@ -73,7 +73,7 @@ class Main {
       	Scanner reader= new Scanner(System.in);
 
         //Asknig for information and prompting user to enter info
-        String firstName, lastName, city, postalCode, creditCard;
+        String firstName, lastName, city, postalCode, creditCardNum;
 
         //Promts user to input their first name
         System.out.println("What is your FIRST name?");
@@ -97,15 +97,15 @@ class Main {
 	   
 	   //Promts to take input for card number
         System.out.print("What is your credit card number? ");
-        String creditCardNum = reader.nextLine();
+        creditCardNum = reader.nextLine();
         validateCreditCard(creditCardNum);
 
         String customer = (customerId+"").concat(",")
             .concat(firstName).concat(",")
         		.concat(lastName).concat(",")
         		.concat(city).concat(",")
-        		.concat(postalCode).concat(",");
-        		.concat(creditCardNum).concat(",");
+        		.concat(postalCode).concat(",")
+        		.concat(creditCardNum);
         return customer;
    }
 
