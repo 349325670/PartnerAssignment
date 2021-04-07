@@ -33,7 +33,8 @@ class Main {
 
         // Only the line below may be editted based on the parameter list and how you design the method return
 		    // Any necessary variables may be added to this if section, but nowhere else in the code
-        String customer = enterCustomerInfo(customerId);
+        String customer = enterCustomerInfo
+        (customerId);
         data = data.concat(customer).concat("\n");
         customerId = customerId + 1;                
       }
@@ -66,35 +67,27 @@ class Main {
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-   public static void enterCustomerInfo(int customerId) {
+   public static String enterCustomerInfo(int customerId) {
 	   
 	//Initializing Scanner inside enterCustomerInfo method to take user inputs
       	Scanner reader= new Scanner(System.in);
 
         //Asknig for information and prompting user to enter info
+        String firstName, lastName, city, postalCode, creditCard;
 
         //Promts user to input their first name
         System.out.println("What is your FIRST name?");
-        String firstName=reader.nextLine();
+        firstName = reader.nextLine();
         
         //Prompts user to input their last name
         System.out.println("What is your LAST name?");
-        String lastName= reader.nextLine();
+        lastName = reader.nextLine();
 
         //Promts user to input city of residence.
         System.out.println("What is your city name?");
-        String city= reader.nextLine();
-        
-        //I am not taking input below here. Instead I will take the input in the main method right after this method has been called.
-   }
+        city = reader.nextLine();
 
-    public static boolean validatePostalCode(String postalCode){
-      if(postalCode.length() < 3) {
-    		// postal must be at least 3 or more characters
-            System.out.println("Invalid Postal Code: Postal must be at least 3 or more characters");
-        	return false;
-    	}
-      boolean isValidPostalCode;
+        boolean isValidPostalCode;
         do {
             System.out.print("Enter Postal Code (3 or more characters) : ");
             postalCode = reader.nextLine();
@@ -105,13 +98,19 @@ class Main {
             .concat(firstName).concat(",")
         		.concat(lastName).concat(",")
         		.concat(city).concat(",")
-        		.concat(postalCode).concat(",")
-        		.concat(creditCard).concat(",");
-    	
+        		.concat(postalCode).concat(",");
+        		//.concat(creditCard).concat(",");
         return customer;
-    }
+   }
 
-        try {
+    public static boolean validatePostalCode(String postalCode){
+    	if(postalCode.length() < 3) {
+    		// postal must be at least 3 or more characters
+            System.out.println("Invalid Postal Code: Postal must be at least 3 or more characters");
+        	return false;
+    	}
+      
+    	try {
     		File pcFile = new File("postal_codes.csv");
     		Scanner reader = new Scanner(pcFile);
     		// skip first line with field names
@@ -193,4 +192,8 @@ class Main {
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
     *******************************************************************/
   } 
+  public static int charToInt(char charValue) {
+		int integerValue = Integer.parseInt(charValue + "");
+		return integerValue;
+	}
  }
