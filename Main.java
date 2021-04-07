@@ -97,7 +97,7 @@ class Main {
 	   
 	   //Promts to take input for card number
         System.out.print("What is your credit card number? ");
-        String creditCardNum= reader.nextLine();
+        String creditCardNum = reader.nextLine();
         validateCreditCard(creditCardNum);
 
         String customer = (customerId+"").concat(",")
@@ -105,7 +105,7 @@ class Main {
         		.concat(lastName).concat(",")
         		.concat(city).concat(",")
         		.concat(postalCode).concat(",");
-        		//.concat(creditCard).concat(",");
+        		.concat(creditCardNum).concat(",");
         return customer;
    }
 
