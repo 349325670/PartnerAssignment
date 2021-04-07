@@ -83,13 +83,60 @@ class Main {
 
         //Promts to take input for card number
         System.out.println("What is your credit card number?");
+        String creditCard = reader.nextLine();
 
         //I am not taking input below here. Instead I will take the input in the main method right after this method has been called.
-	   
    }
+    
 
-    public static void validatePostalCode(){
+    public static boolean validatePostalCode(String postalCode){
+      if(postalCode.length() < 3) {
+    		// postal must be at least 3 or more characters
+            System.out.println("Invalid Postal Code: Postal must be at least 3 or more characters");
+        	return false;
+    	}
+      boolean isValidPostalCode;
+        do {
+            System.out.print("Enter Postal Code (3 or more characters) : ");
+            postalCode = reader.nextLine();
+            isValidPostalCode = validatePostalCode(postalCode);        	
+        } while (!isValidPostalCode);
+
+        String customer = (customerId+"").concat(",")
+            .concat(firstName).concat(",")
+        		.concat(lastName).concat(",")
+        		.concat(city).concat(",")
+        		.concat(postalCode).concat(",")
+        		.concat(creditCard).concat(",");
+        		//.concat(customerId + "");
+    	
+        return customer;
+
+        try {
+    		File pcFile = new File("postal_codes.csv");
+    		Scanner reader = new Scanner(pcFile);
+    		// skip first line with field names
+    		if(reader.hasNextLine()) {
+    			reader.nextLine();
+    		}
+    		while (reader.hasNextLine()) {
+    			String data = reader.nextLine();
+    			if(data.length()>0) {
+    				boolean matched = matchPostalCode(postalCode, data);
+    				if(matched) {
+    					return true;
+    				}
+    			}
+    		}
+    		reader.close();
+    	} catch (Exception e) {
+    		System.out.println("An error occurred.");
+    		e.printStackTrace();
+    	}
+        System.out.println("Invalid Postal Code: Postal code must be from postal_codes.csv file");
+    	return false;
     }
+
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type
@@ -107,7 +154,5 @@ class Main {
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
     *******************************************************************/
-}
     
  }
-}
