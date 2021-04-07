@@ -140,13 +140,81 @@ class Main {
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void validateCreditCard(){
+    public static void validateCreditCard(String creditCard){
+
+      //Initializing Scanner in this method.
+      Scanner reader = new Scanner(System.in);
+
+      //Finding out length by using .length() method
+      int cardLen= creditCard.length();
+
+      //Creating a while loop which forces user to input a card number which is 9 in length. If its less than 9 user will be forced to re-input.
+
+      while (cardLen<9){
+        System.out.println("Credit Card is invalid. It should be atleast 9 characters. Please try again.");
+        creditCard= reader.nextLine();
+        cardLen= creditCard.length();
+      }
+
+      //Step 1: Reverse the order of digits I used a simple 'for' loop to reverse the string. 
+      String reverseCreditCard= "";
+      for (int i=cardLen-1; i>=0; i--){
+        reverseCreditCard= reverseCreditCard+creditCard.charAt(i);
+      }
+
+      //Step 2: Performing a partial sum of all the odd numbers. Giving sum1 a value to perform partial sums. (digits 1, 3, 5...)
+      
+      int sum1=0;
+      for (int i=0; i<cardLen; i=i+2){
+        int oddCreditCardInts= charToInt(reverseCreditCard.charAt(i));
+        sum1=sum1+oddCreditCardInts;
+      }
+
+      //Step number 3: Take the second, fourth ... and every other even digits  after they have been reversed. 
+    	//	a.	Multiply each digit by two (double) and sum the digits, 
+    	// if the answer is greater than 9 then add the 2 digits to form partial sums for the even digits. 
+    	//  b.	Sum the partial sums of the even digits to form sum2
+
+      int evenCreditCardInts=0;
+      int sum2=0;
+       for (int i=1; i<cardLen; i=i+2){
+         evenCreditCardInts= charToInt(reverseCreditCard.charAt(i));
+
+         //Multiply even digits by 2...
+          int sum2Digit2x= evenCreditCardInts*2;
+
+        //Over here I did very simple maths that Java uses. Basically I divided the number that was greater than 9 by 10. What this will do give me a whole digit since it was not a double and was an int instead. And then I did the modulus(%) which gave me the remainder and added those two. Eg. If the number was 16, I did 16/10=1 and 16%10=6 and added 1+6=7 So 7 is my newDigit.
+
+        int finalSum2Digit;
+        if (sum2Digit2x>9){
+          finalSum2Digit=(sum2Digit2x/10)+(sum2Digit2x%10);
+        }
+        else{
+          //This means if the number is less than 9, the final digit will be the digit it initially was. There will be no partial sum. 
+          finalSum2Digit= sum2Digit2x;
+        }
+        sum2= sum2+ finalSum2Digit;
+       }
+       
+        
+         //Final Total sum of both sum1 and sum2. This total sum is the sum used to for checking whehter it ends in 0 or not. 
+      int totalSum= sum1+sum2;
+
+        //For the last Step about checking whether it ends with a 0, I again used very simple math. I know that if it ends with a zero, the number has to be divided by 10 and remainder should be 0. Eg 70%10=0; but 47%10=7; So I again used the modulus fuction to figure out whether it ends with a zero or no.
+
+        int remainderValue= totalSum%10;
+        
+        if(remainderValue==0){
+          System.out.println("*****Success*****");
+        }
+        else{
+          System.out.println("*****Fail*****");
+        }
+
+
     }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
+    
+   
     public static void generateCustomerDataFile(String data){
       Scanner reader = new Scanner(System.in);
         boolean shouldWrite;
