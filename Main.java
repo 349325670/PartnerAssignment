@@ -71,6 +71,7 @@ class Main {
 	   
 	//Initializing Scanner inside enterCustomerInfo method to take user inputs
       	Scanner reader= new Scanner(System.in);
+        boolean loop= false;
 
         //Asknig for information and prompting user to enter info
         String firstName, lastName, city, postalCode, creditCardNum;
@@ -95,10 +96,12 @@ class Main {
         } while (!isValidPostalCode);
 	   
 	   
-	   //Promts to take input for card number
+	      //Promts to take input for card number
+        do{
         System.out.print("What is your credit card number? ");
         creditCardNum = reader.nextLine();
-        validateCreditCard(creditCardNum);
+        loop= validateCreditCard(creditCardNum);
+        }while(loop == false);
 
         String customer = (customerId+"").concat(",")
             .concat(firstName).concat(",")
@@ -141,12 +144,8 @@ class Main {
     	return false;
     }
 
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
-    public static void validateCreditCard(String creditCard){
+    
+    public static boolean validateCreditCard(String creditCard){
 
       //Initializing Scanner in this method.
       Scanner reader = new Scanner(System.in);
@@ -212,9 +211,11 @@ class Main {
         
         if(remainderValue==0){
           System.out.println("*****Success*****");
+          return true;
         }
         else{
           System.out.println("*****Fail*****");
+          return false;
         }
 
 
@@ -262,12 +263,16 @@ class Main {
 			}
 		}
 		return true;
+  }
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
     *******************************************************************/
-  } 
+
+    //I created this extra method to change my char value to int value to do mathematical operations with the number which is required for validation purposes
+  
   public static int charToInt(char charValue) {
 		int integerValue = Integer.parseInt(charValue + "");
 		return integerValue;
 	}
- }
+}
+ 
