@@ -1,15 +1,11 @@
 // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
 
+
 import java.util.Scanner;
-import java.io.File;
-import java.io.PrintWriter;
 // More packages may be imported in the space below
 
 class Main {
   public static void main(String[] args) {
-
-    File f = new File("File");
-    System.out.println(f.getAbsolutePath());
 
     
     // Please do not edit any of these variables
@@ -21,20 +17,13 @@ class Main {
 
     // More variables for the main may be declared in the space below
 
-     String data = "ID,First Name,Last Name,City,Postal Code,Credit Card\n";
-     int customerId = 1;
-
 
     do{
+
       printMenu();                                    // Printing out the main menu
       userInput = reader.nextLine();                  // User selection from the menu
 
       if (userInput.equals(enterCustomerOption)){
-        String customer = enterCustomerInfo(customerId);
-          // Add the newly entered customer to data.
-          data = data.concat(customer).concat("\n");
-          // Move customer Id to next id.
-          customerId = customerId + 1;                
 
         // Only the line below may be editted based on the parameter list and how you design the method return
 		    // Any necessary variables may be added to this if section, but nowhere else in the code
@@ -69,29 +58,32 @@ class Main {
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-   public static void enterCustomerInfo(int customerId) {
-     Scanner reader = new Scanner(System.in);
+   public static void enterCustomerInfo() {
 	   
 	//Initializing Scanner inside enterCustomerInfo method to take user inputs
+      	Scanner reader= new Scanner(System.in);
 
         //Asknig for information and prompting user to enter info
-        String firstName, lastName, city, postalCode, creditCard;
 
         //Promts user to input their first name
         System.out.println("What is your FIRST name?");
-        firstName = reader.nextLine();
+        String firstName=reader.nextLine();
         
         //Prompts user to input their last name
         System.out.println("What is your LAST name?");
-        lastName = reader.nextLine();
+        String lastName= reader.nextLine();
 
         //Promts user to input city of residence.
         System.out.println("What is your city name?");
-        city = reader.nextLine();
+        String city= reader.nextLine();
 
         //Promts user to input postal Code
+        System.out.println("What is your postal code?");
+        String postalCode= reader.nextLine();
 
         //Promts to take input for card number
+        System.out.println("What is your credit card number?");
+        String creditCard = reader.nextLine();
 
         //I am not taking input below here. Instead I will take the input in the main method right after this method has been called.
    }
@@ -116,9 +108,9 @@ class Main {
         		.concat(city).concat(",")
         		.concat(postalCode).concat(",")
         		.concat(creditCard).concat(",");
+        		//.concat(customerId + "");
     	
         return customer;
-    }
 
         try {
     		File pcFile = new File("postal_codes.csv");
@@ -186,9 +178,9 @@ class Main {
 		} catch (Exception e) {
     		System.out.println("An error occurred.");
 			e.printStackTrace();
-		}
     }
-    private static boolean matchPostalCode(String postalCode, String data) {
+		}
+    public static boolean matchPostalCode(String postalCode, String data) {
 		String codeFromFile = data.substring(0,3);
 		for(int i=0;i<3;i++) {
 			char fileChar = codeFromFile.charAt(i);
