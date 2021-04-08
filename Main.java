@@ -3,6 +3,7 @@
 //Methods done by Iliyan: enterCustomerInfo   validateCreditCard   charToInt
 //Methods done by Abdullah: validatePostalCode generateCustomerDataFile
 
+
 import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.File;
@@ -90,7 +91,7 @@ class Main {
         System.out.print("What is your city name? ");
         city = reader.nextLine();
 
-        //Create a boolean for postal code so that it is 3 or more characters 
+        //Abdullah did this boolean for postal code - Create a boolean for postal code so that it is 3 or more characters 
         boolean isValidPostalCode;
         do {
             System.out.print("Enter Postal Code (3 or more characters) : ");
@@ -106,7 +107,7 @@ class Main {
         loop= validateCreditCard(creditCardNum);
         }while(loop == false);
 
-        //Combine all the strings with customers information that is inputted together to the file
+        //Abdullah did this concat - Combine all the strings with customers information that is inputted together to the file
         String customer = (customerId+"").concat(",")
             .concat(firstName).concat(",")
         		.concat(lastName).concat(",")
