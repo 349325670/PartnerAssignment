@@ -9,6 +9,7 @@ import java.io.File;
 class Main {
   public static void main(String[] args) {
 
+    //Create a file in this replit folder with customers information
     File f = new File("File");
     System.out.println(f.getAbsolutePath());
     
@@ -21,6 +22,7 @@ class Main {
 
     // More variables for the main may be declared in the space below
 
+    //Make a string that gets customers data in a specific order with their ID that goes from 1 and changes for each customer starting from 1
     String data = "ID,First Name,Last Name,City,Postal Code,Credit Card\n";
       int customerId = 1;
 
@@ -32,6 +34,8 @@ class Main {
 
         // Only the line below may be editted based on the parameter list and how you design the method return
 		    // Any necessary variables may be added to this if section, but nowhere else in the code
+        
+        //Customer ID starts from 1 and keeps on adding one each time customer inputs thier data to the file
         String customer = enterCustomerInfo
         (customerId);
         data = data.concat(customer).concat("\n");
@@ -86,6 +90,7 @@ class Main {
         System.out.println("What is your city name?");
         city = reader.nextLine();
 
+        //Abdullah did this - Create a boolean for postal code validation so that customer can't type in their wrong postal code and with less than 3 letters
         boolean isValidPostalCode;
         do {
             System.out.print("Enter Postal Code (3 or more characters) : ");
@@ -101,6 +106,7 @@ class Main {
         loop= validateCreditCard(creditCardNum);
         }while(loop == false);
 
+        //Abdullah did this - Use concat to make a order of customers information for the file when customers info is inside the file
         String customer = (customerId+"").concat(",")
             .concat(firstName).concat(",")
         		.concat(lastName).concat(",")
@@ -109,14 +115,14 @@ class Main {
         		.concat(creditCardNum);
         return customer;
    }
-
+   //Create postal code validation boolean method so that customer cant input postal code that is not less than 3 characters.
     public static boolean validatePostalCode(String postalCode){
     	if(postalCode.length() < 3) {
     		// postal must be at least 3 or more characters
         System.out.println("Invalid Postal Code: Postal must be at least 3 or more characters");
         return false;
     	}
-      
+      //Use try and catch for the "postal_codes.csv" file so that customers postal code is validated if it is from the csv file
     	try {
     		File pcFile = new File("postal_codes.csv");
     		Scanner reader = new Scanner(pcFile);
@@ -138,6 +144,7 @@ class Main {
     		System.out.println("An error occurred.");
     		e.printStackTrace();
     	}
+      //If customers postal code is not from the csv file, give them an error make them re input postal code again that is from csv file
         System.out.println("Invalid Postal Code: Postal code must be from postal_codes.csv file");
     	return false;
     }
@@ -218,8 +225,8 @@ class Main {
 
 
     }
-    
-   
+
+    //Create customer data method that asks for file location and file name so that it can create a file named whatever you input the file name as and it would make a file with customers information wherever the file location is on your computer that you inputted
     public static void generateCustomerDataFile(String data){
       Scanner reader = new Scanner(System.in);
         boolean shouldWrite;
@@ -230,7 +237,8 @@ class Main {
 	
 	        System.out.print("Enter Output File Name : ");
 	        String fileName = reader.nextLine();
-	        
+
+          //If more than one customers information data is being inputted, then if you want it to store the info in the same exact file as the one before for the recent customer, then it will ask for y or n as yes or no only if the file location and name are both same as any other customers file that was inputted before
 	        shouldWrite=true;
 	        file = new File(fileLocation, fileName);
 	        if(file.exists()) {
@@ -251,6 +259,7 @@ class Main {
 			e.printStackTrace();
     }
 		}
+    //Create a boolean postal code that makes java only read first 3 letters in the postal_code.csv file in each line since first 3 letters are validated postal codes that customer has to input as their postal code and reads no more than first 3 letters in each line since first 3 letters are the postal codes
     public static boolean matchPostalCode(String postalCode, String data) {
 		String codeFromFile = data.substring(0,3);
 		for(int i=0;i<3;i++) {
@@ -266,8 +275,7 @@ class Main {
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
     *******************************************************************/
 
-    //I created this extra method to change my char value to int value to do mathematical operations with the number which is required for validation purposes
-  
+  //Created a method that converts char value to int for postal code first 3 letters in the csv file 
   public static int charToInt(char charValue) {
 		int integerValue = Integer.parseInt(charValue + "");
 		return integerValue;
