@@ -1,5 +1,7 @@
 // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
 
+//Methods done by Iliyan: enterCustomerInfo   validateCreditCard   charToInt
+//Methods done by Abdullah: validatePostalCode generateCustomerDataFile
 
 import java.util.Scanner;
 import java.io.PrintWriter;
@@ -9,7 +11,6 @@ import java.io.File;
 class Main {
   public static void main(String[] args) {
 
-    //Create a file in this replit folder with customers information
     File f = new File("File");
     System.out.println(f.getAbsolutePath());
     
@@ -22,11 +23,11 @@ class Main {
 
     // More variables for the main may be declared in the space below
 
-    //Make a string that gets customers data in a specific order with their ID that goes from 1 and changes for each customer starting from 1
     String data = "ID,First Name,Last Name,City,Postal Code,Credit Card\n";
       int customerId = 1;
 
     do{
+
       printMenu();                                    // Printing out the main menu
       userInput = reader.nextLine();                  // User selection from the menu
 
@@ -34,8 +35,6 @@ class Main {
 
         // Only the line below may be editted based on the parameter list and how you design the method return
 		    // Any necessary variables may be added to this if section, but nowhere else in the code
-        
-        //Customer ID starts from 1 and keeps on adding one each time customer inputs thier data to the file
         String customer = enterCustomerInfo
         (customerId);
         data = data.concat(customer).concat("\n");
@@ -49,10 +48,11 @@ class Main {
       else{
         System.out.println("Please type in a valid option (A number from 1-9)");
       }
-      } while (!userInput.equals(exitCondition));         // Exits once the user types 
+
+        } while (!userInput.equals(exitCondition));         // Exits once the user types 
         
-      reader.close();
-      System.out.println("Program Terminated");
+        reader.close();
+        System.out.println("Program Terminated");
     }
     public static void printMenu(){
         System.out.println("Customer and Sales System\n"
@@ -79,18 +79,17 @@ class Main {
         String firstName, lastName, city, postalCode, creditCardNum;
 
         //Promts user to input their first name
-        System.out.println("What is your FIRST name?");
+        System.out.print("What is your FIRST name? ");
         firstName = reader.nextLine();
         
         //Prompts user to input their last name
-        System.out.println("What is your LAST name?");
+        System.out.print("What is your LAST name? ");
         lastName = reader.nextLine();
 
         //Promts user to input city of residence.
-        System.out.println("What is your city name?");
+        System.out.print("What is your city name? ");
         city = reader.nextLine();
 
-        //Abdullah did this - Create a boolean for postal code validation so that customer can't type in their wrong postal code and with less than 3 letters
         boolean isValidPostalCode;
         do {
             System.out.print("Enter Postal Code (3 or more characters) : ");
@@ -106,7 +105,6 @@ class Main {
         loop= validateCreditCard(creditCardNum);
         }while(loop == false);
 
-        //Abdullah did this - Use concat to make a order of customers information for the file when customers info is inside the file
         String customer = (customerId+"").concat(",")
             .concat(firstName).concat(",")
         		.concat(lastName).concat(",")
@@ -115,14 +113,14 @@ class Main {
         		.concat(creditCardNum);
         return customer;
    }
-   //Create postal code validation boolean method so that customer cant input postal code that is not less than 3 characters.
+
     public static boolean validatePostalCode(String postalCode){
     	if(postalCode.length() < 3) {
     		// postal must be at least 3 or more characters
-        System.out.println("Invalid Postal Code: Postal must be at least 3 or more characters");
-        return false;
+            System.out.println("Invalid Postal Code: Postal must be at least 3 or more characters");
+        	return false;
     	}
-      //Use try and catch for the "postal_codes.csv" file so that customers postal code is validated if it is from the csv file
+      
     	try {
     		File pcFile = new File("postal_codes.csv");
     		Scanner reader = new Scanner(pcFile);
@@ -144,7 +142,6 @@ class Main {
     		System.out.println("An error occurred.");
     		e.printStackTrace();
     	}
-      //If customers postal code is not from the csv file, give them an error make them re input postal code again that is from csv file
         System.out.println("Invalid Postal Code: Postal code must be from postal_codes.csv file");
     	return false;
     }
@@ -206,26 +203,25 @@ class Main {
        }
        
         
-         //Final Total sum of both sum1 and sum2. This total sum is the sum used to for checking whehter it ends in 0 or not. 
-      int totalSum= sum1+sum2;
+        //Final Total sum of both sum1 and sum2. This total sum is the sum used to for checking whehter it ends in 0 or not. 
+        int totalSum= sum1+sum2;
 
-        //For the last Step about checking whether it ends with a 0, I again used very simple math. I know that if it ends with a zero, the number has to be divided by 10 and remainder should be 0. Eg 70%10=0; but 47%10=7; So I again used the modulus fuction to figure out whether it ends with a zero or no.
+        //For the last Step about checking whether it ends with a 0, I again used very simple math. I know that if it ends with a zero, the number has to be divided by 10 and remainder should be 0. Eg 70%10=0; but 47%10=7; So I again used the modulus fuction to  figure out whether it ends with a zero or no.
 
         int remainderValue= totalSum%10;
         
         if(remainderValue==0){
           System.out.println("*****Success*****");
-          return true;
+          return true;//By returning true this means that the while loop condition is met and it will not run anymore. 
         }
         else{
           System.out.println("*****Fail*****");
-          return false;
+          return false;//By returning false this means that the while loop condition is not met and it will run all over again. 
         }
 
 
     }
-
-    //Create customer data method that asks for file location and file name so that it can create a file named whatever you input the file name as and it would make a file with customers information wherever the file location is on your computer that you inputted
+   
     public static void generateCustomerDataFile(String data){
       Scanner reader = new Scanner(System.in);
         boolean shouldWrite;
@@ -236,8 +232,7 @@ class Main {
 	
 	        System.out.print("Enter Output File Name : ");
 	        String fileName = reader.nextLine();
-
-          //If more than one customers information data is being inputted, then if you want it to store the info in the same exact file as the one before for the recent customer, then it will ask for y or n as yes or no only if the file location and name are both same as any other customers file that was inputted before
+	        
 	        shouldWrite=true;
 	        file = new File(fileLocation, fileName);
 	        if(file.exists()) {
@@ -258,7 +253,6 @@ class Main {
 			e.printStackTrace();
     }
 		}
-    //Create a boolean postal code that makes java only read first 3 letters in the postal_code.csv file in each line since first 3 letters are validated postal codes that customer has to input as their postal code and reads no more than first 3 letters in each line since first 3 letters are the postal codes
     public static boolean matchPostalCode(String postalCode, String data) {
 		String codeFromFile = data.substring(0,3);
 		for(int i=0;i<3;i++) {
@@ -274,9 +268,11 @@ class Main {
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
     *******************************************************************/
 
-  //Created a method that converts char value to int for postal code first 3 letters in the csv file 
-  public static int charToInt(char charValue) {
+    //I created this extra method to change my char value to int value to do mathematical operations with the number which is required for validation purposes
+
+    public static int charToInt(char charValue) {
 		int integerValue = Integer.parseInt(charValue + "");
 		return integerValue;
 	}
 }
+ 
