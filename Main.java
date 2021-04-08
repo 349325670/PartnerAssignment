@@ -160,10 +160,9 @@ class Main {
 
       //Creating a while loop which forces user to input a card number which is 9 in length. If its less than 9 user will be forced to re-input.
 
-      while (cardLen<9){
+      if (cardLen<9){
         System.out.println("Credit Card is invalid. It should be atleast 9 characters. Please try again.");
-        creditCard= reader.nextLine();
-        cardLen= creditCard.length();
+        return false;
       }
 
       //Step 1: Reverse the order of digits I used a simple 'for' loop to reverse the string. 
