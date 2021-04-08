@@ -90,6 +90,7 @@ class Main {
         System.out.print("What is your city name? ");
         city = reader.nextLine();
 
+        //Create a boolean for postal code so that it is 3 or more characters 
         boolean isValidPostalCode;
         do {
             System.out.print("Enter Postal Code (3 or more characters) : ");
@@ -105,6 +106,7 @@ class Main {
         loop= validateCreditCard(creditCardNum);
         }while(loop == false);
 
+        //Combine all the strings with customers information that is inputted together to the file
         String customer = (customerId+"").concat(",")
             .concat(firstName).concat(",")
         		.concat(lastName).concat(",")
@@ -113,14 +115,15 @@ class Main {
         		.concat(creditCardNum);
         return customer;
    }
-
+   //Create a boolean method for postal code validation so that if it is less than 3 characters then it would give customer an error and they should re-input
     public static boolean validatePostalCode(String postalCode){
     	if(postalCode.length() < 3) {
     		// postal must be at least 3 or more characters
             System.out.println("Invalid Postal Code: Postal must be at least 3 or more characters");
         	return false;
     	}
-      
+
+      //Use try and catch to make Java read "postal_code.csv" file and read postal codes that are inside the file and the postal code that was inputted by customer to see if it is a validated postal code
     	try {
     		File pcFile = new File("postal_codes.csv");
     		Scanner reader = new Scanner(pcFile);
@@ -221,7 +224,8 @@ class Main {
 
 
     }
-   
+
+    //Create a method for customers data file where it will ask customer to input file location that is on their computer or if they want to create a file on replit folder, either way is good and ask file name so java can create a file using that name and make a file in the location that was inputted
     public static void generateCustomerDataFile(String data){
       Scanner reader = new Scanner(System.in);
         boolean shouldWrite;
@@ -232,7 +236,8 @@ class Main {
 	
 	        System.out.print("Enter Output File Name : ");
 	        String fileName = reader.nextLine();
-	        
+
+          //If file already exists on computer or this replit folder then ask user for either to enter their data in the same file or a different one with a y/n (yes or no)
 	        shouldWrite=true;
 	        file = new File(fileLocation, fileName);
 	        if(file.exists()) {
@@ -244,22 +249,24 @@ class Main {
 	        }
         } while (!shouldWrite);
 
+        //Use try and catch to let customer know if the file doesn't exist if the file location doesnt have a folder or is not a valid file location
         try {
-			PrintWriter out = new PrintWriter(file);
-			out.println(data);
-			out.close();
-		} catch (Exception e) {
-    		System.out.println("An error occurred.");
-			e.printStackTrace();
-    }
-		}
+			   PrintWriter out = new PrintWriter(file);
+			   out.println(data);
+			   out.close();
+		    } catch (Exception e) {
+    		  System.out.println("An error occurred.");
+			    e.printStackTrace();
+        }
+}
+    //Create a boolean for postal code so that java reads postal code from the csv file from each line but only first 3 letters since those are the letters that are postal codes in the file
     public static boolean matchPostalCode(String postalCode, String data) {
-		String codeFromFile = data.substring(0,3);
-		for(int i=0;i<3;i++) {
-			char fileChar = codeFromFile.charAt(i);
-			char postalCodeChar = postalCode.charAt(i);
-			if(fileChar!=postalCodeChar) {
-				return false;
+		  String codeFromFile = data.substring(0,3);
+		  for(int i=0;i<3;i++) {
+			  char fileChar = codeFromFile.charAt(i);
+			  char postalCodeChar = postalCode.charAt(i);
+			  if(fileChar!=postalCodeChar) {
+				  return false;
 			}
 		}
 		return true;
