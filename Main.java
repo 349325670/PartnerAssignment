@@ -25,7 +25,6 @@ class Main {
       int customerId = 1;
 
     do{
-
       printMenu();                                    // Printing out the main menu
       userInput = reader.nextLine();                  // User selection from the menu
 
@@ -46,11 +45,10 @@ class Main {
       else{
         System.out.println("Please type in a valid option (A number from 1-9)");
       }
-
-        } while (!userInput.equals(exitCondition));         // Exits once the user types 
+      } while (!userInput.equals(exitCondition));         // Exits once the user types 
         
-        reader.close();
-        System.out.println("Program Terminated");
+      reader.close();
+      System.out.println("Program Terminated");
     }
     public static void printMenu(){
         System.out.println("Customer and Sales System\n"
@@ -115,8 +113,8 @@ class Main {
     public static boolean validatePostalCode(String postalCode){
     	if(postalCode.length() < 3) {
     		// postal must be at least 3 or more characters
-            System.out.println("Invalid Postal Code: Postal must be at least 3 or more characters");
-        	return false;
+        System.out.println("Invalid Postal Code: Postal must be at least 3 or more characters");
+        return false;
     	}
       
     	try {
@@ -275,4 +273,3 @@ class Main {
 		return integerValue;
 	}
 }
- 
